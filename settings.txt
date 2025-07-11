@@ -1,0 +1,1 @@
+{"Width": "1920", "Height": "1080", "Fullscreen": true, "Username": "Bartholomew Montgomery Clyde", "Picture": "mr.jpg", "Server Port": "6778"}

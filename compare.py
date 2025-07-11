@@ -8,7 +8,9 @@ def concatenateInts(a, b):
     return a*100 + b
 
 
-def getValueOfHand(parent, hand):
+def getValueOfHand(hand):
+    if len(hand) < 2:
+        return 0
     
     # hand value = 01-10 + 01-13 e.g. 0510 = jack high straight
     
@@ -17,9 +19,8 @@ def getValueOfHand(parent, hand):
     straight = 0
     suitCount = [0, 0, 0, 0]
     pairCount = [0, 0, 0] # pair, three, four
-    suits = parent.deck.suits
+    suits = ["Clubs", "Diamonds", "Hearts", "Spades"]
     prevCard = None
-    names = ['Pair', 'Three of a kind', 'Four of a kind']
     hands = []
     hasStraight = False
     hasFlush = False
@@ -92,9 +93,9 @@ def getValueOfHand(parent, hand):
     # print flush - 06
     for i in range(len(suitCount)):
         if suitCount[i] >= 5:
-            for i in hand:
-                if i.getSuit() == suit[i]:
-                    bestCard = i
+            for card in hand:
+                if card.getSuit() == suits[i]:
+                    bestCard = card
             value = concatenateInts(6, bestCard.getValue())
             hands.append(value)
             hasFlush = True
@@ -113,7 +114,7 @@ def getValueOfHand(parent, hand):
             
     return max(hands)
 
-def valueToName(parent, value):
+def valueToName(value):
     hands = {
         1 : "? High",
         2 : "Pair of ?'s",
@@ -126,7 +127,24 @@ def valueToName(parent, value):
         9 : "? High Straight Flush",
     }
     
-    cardNames = parent.deck.deck[0].values
+    cardNames = {
+            1 : "2",
+            2 : "3",
+            3 : "4",
+            4 : "5",
+            5 : "6",
+            6 : "7",
+            7 : "8",
+            8 : "9",
+            9 : "10",
+            10 : "Jack",
+            11 : "Queen",
+            12 : "King",
+            13 : "Ace"
+        }
+    
+    if value == 0:
+        return 'No Hand'
     
     handNumber, cardName = int(str(value)[:1]), cardNames[int(str(value)[1:])]
     

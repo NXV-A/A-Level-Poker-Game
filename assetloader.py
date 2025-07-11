@@ -1,3 +1,4 @@
+import os
 
 imgGroups = {
     "Assets/Cards/": [
@@ -56,10 +57,27 @@ imgGroups = {
             'card_back',
             'card_empty',
         ],
-    "": [
-            "gameoil.jpg",
-            "test.jpg",
+    "Assets/Default Pfp/": [
+            "gameoil",
             "teams",
+            "no image",
+            "Graham",
+            "Lukas",
+            "Bahn",
+            "Jim",
+            "Jorge",
+            "Kallum",
+            "Sachet",
+            "Red Chief",
+            "John",
+            "Greg",
+            "Joe",
+            "Margaret",
+            "Barbara",
+            'Agatha',
+            'Helena',
+            'Christine',
+            'Jenny'
         ],
     "Assets/Chips/": [
             '1',
@@ -79,6 +97,24 @@ imgGroups = {
             'F',
             'Space',
             'Up',
+            'Tab',
         ],
-    "Assets/": ["QR"]
+    "Assets/Misc/": [
+            'Poker Assistance',
+        ],
+    "Assets/": ["QR", "Logo"]
     }
+
+imagePaths = {}
+
+def load():
+    for (name, group) in imgGroups.items():
+        for item in group:
+            ext = ".png"
+            splitted = item.split(".")
+            if len(splitted) > 1:
+                item = splitted[0]
+                ext = "." + splitted[1]
+                
+            imagePaths[item] = os.path.join(name, item + ext)
+load()
